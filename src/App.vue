@@ -1,4 +1,5 @@
 <template>
+
 <div>
    <!-- 头部结构 -->
     <div class="header">
@@ -38,9 +39,10 @@
                 <div id="menu2" class="nav-box menuhd">
                     <ul>
                         <li class="index">
-                            <a href="#" class="">
-                                <span class="out" style="top: 0px;">首页</span>
-                            </a>
+                            <router-link to="/index">
+                                  <span class="out" style="top: 0px;">首页</span>
+                            </router-link>
+                              
                         </li>
                         <li class="news">
                             <a href="#" class="">
@@ -80,6 +82,10 @@
             </div>
         </div>
     </div>
+
+    <!-- 路由出口 -->
+    <router-view></router-view>
+
     <!-- 底部结构 -->
     <div class="footer">
                 <div class="section">
@@ -158,5 +164,8 @@ $(document).ready(function() {
 /* 覆盖默认的背景图片 */
 #menu2 {
   background-image: none;
+}
+body{
+    background-color: transparent;
 }
 </style>
