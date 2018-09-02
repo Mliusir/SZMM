@@ -1,5 +1,5 @@
 <template>
-<!-- 首页的中间结构样式 -->
+    <!-- 首页的中间结构样式 -->
     <div>
         <div class="section">
             <div class="location">
@@ -40,12 +40,12 @@
                     </div>
                     <!--幻灯片-->
                     <div class="left-705">
-                     <el-carousel >
-                        <el-carousel-item v-for="item in sliderlist" :key="item.id">
-                            <a href="#">
-                                 <img :src="item.img_url" alt="">
-                            </a>
-                        </el-carousel-item>
+                        <el-carousel>
+                            <el-carousel-item v-for="item in sliderlist" :key="item.id">
+                                <a href="#">
+                                    <img :src="item.img_url" alt="">
+                                </a>
+                            </el-carousel-item>
                         </el-carousel>
                     </div>
                     <!--/幻灯片-->
@@ -80,10 +80,10 @@
                 <div class="wrap-box">
                     <ul class="img-list">
                         <li v-for="itemSon  in item.datas" :key="itemSon.artID">
-                           <router-link :to="'/detail/'+itemSon.artID">
-                                  <div class="img-box">
+                            <router-link :to="'/detail/'+itemSon.artID">
+                                <div class="img-box">
                                     <!-- <img :src="itemSon.img_url"> -->
-                                     <img v-lazy="itemSon.img_url">
+                                    <img v-lazy="itemSon.img_url">
                                 </div>
                                 <div class="info">
                                     <h3>{{itemSon.artTitle}}版</h3>
@@ -96,7 +96,7 @@
                                         </span>
                                     </p>
                                 </div>
-                           </router-link>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -106,8 +106,7 @@
 </template>
 
 <script>
-// 导入axios
-import axios from "axios";
+// 导入this.$axios
 //导入 moment 的包
 // import moment from "moment";
 //获取数据
@@ -128,27 +127,23 @@ export default {
   //创建完
   created() {
     //网络数据获取  顶部数据
-    axios
-      .get("http://47.106.148.205:8899/site/goods/gettopdata/goods")
-      .then(response => {
-        this.catelist = response.data.message.catelist;
-        this.sliderlist = response.data.message.sliderlist;
-        this.toplist = response.data.message.toplist;
-        // console.log(response);
-      });
+    this.$axios.get("site/goods/gettopdata/goods").then(response => {
+      this.catelist = response.data.message.catelist;
+      this.sliderlist = response.data.message.sliderlist;
+      this.toplist = response.data.message.toplist;
+      // console.log(response);
+    });
     //网络数据获取  商品数据
-    axios
-      .get("http://47.106.148.205:8899/site/goods/getgoodsgroup")
-      .then(response => {
-        this.groupDate = response.data.message;
-      });
-  },
+    this.$axios.get("site/goods/getgoodsgroup").then(response => {
+      this.groupDate = response.data.message;
+    });
+  }
   //过滤器  // 过滤器 抽取到 main.js 为全局过滤器了
-//   filters: {
-//     filtersData(val) {
-//       return moment(val).format("YYYY年MM月DD日");
-//     }
-//   }
+  //   filters: {
+  //     filtersData(val) {
+  //       return moment(val).format("YYYY年MM月DD日");
+  //     }
+  //   }
 };
 </script>
 
